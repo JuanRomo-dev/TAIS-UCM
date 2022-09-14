@@ -1,9 +1,10 @@
+#pragma once
 //
 //  TreeSet_AVL.h
 //
-//  Implementaci√≥n de conjuntos mediante √°rboles de b√∫squeda AVL
+//  ImplementaciÛn de conjuntos mediante ·rboles de b˙squeda AVL
 //
-//  Facultad de Inform√°tica
+//  Facultad de Inform·tica
 //  Universidad Complutense de Madrid
 //
 //  Copyright (c) 2020 Alberto Verdejo
@@ -26,7 +27,7 @@ protected:
     /*
      Nodo que almacena internamente el elemento (de tipo T),
      punteros al hijo izquierdo y derecho, que pueden ser
-     nullptr si el hijo es vac√≠o, y la altura.
+     nullptr si el hijo es vacÌo, y la altura.
      */
     struct TreeNode;
     using Link = TreeNode*;
@@ -34,23 +35,23 @@ protected:
         T elem;
         Link iz, dr;
         int altura;
-        int tam_i;                                                  // A√±adimos el atributo pedido, tam_i.
+        int tam_i;                                                  // AÒadimos el atributo pedido, tam_i.
         TreeNode(T const& e, Link i = nullptr, Link d = nullptr,
             int alt = 1, int tamI = 1) : elem(e), iz(i), dr(d), altura(alt), tam_i(tamI) {}
     };
 
-    // puntero a la ra√≠z de la estructura jer√°rquica de nodos
+    // puntero a la raÌz de la estructura jer·rquica de nodos
     Link raiz;
 
-    // n√∫mero de elementos (cardinal del conjunto)
+    // n˙mero de elementos (cardinal del conjunto)
     int nelems;
 
-    // objeto funci√≥n que compara elementos (orden total estricto)
+    // objeto funciÛn que compara elementos (orden total estricto)
     Comparator menor;
 
 public:
 
-    // constructor (conjunto vac√≠o)
+    // constructor (conjunto vacÌo)
     Set(Comparator c = Comparator()) : raiz(nullptr), nelems(0), menor(c) {}
 
     // constructor por copia
@@ -58,7 +59,7 @@ public:
         copia(other);
     }
 
-    // operador de asignaci√≥n
+    // operador de asignaciÛn
     Set& operator=(Set const& that) {
         if (this != &that) {
             libera(raiz);
@@ -92,28 +93,28 @@ public:
     }
 
     Link existe(T const& k, Link nod) const {
-        if (nod == nullptr)  {              // Caso base: si la ra√≠z es null, entonces no existe el elemento.
+        if (nod == nullptr)  {              // Caso base: si la raÌz es null, entonces no existe el elemento.
             return nullptr;
         }
-        else if (k < nod->tam_i) {          // Si la k es menor que el tam_i de la ra√≠z buscamos el elemento por la izquierda con recursi√≥n.
+        else if (k < nod->tam_i) {          // Si la k es menor que el tam_i de la raÌz buscamos el elemento por la izquierda con recursiÛn.
             return existe(k, nod->iz);
         }
-        else if (nod->tam_i < k) {          // Si la k es mayor que el tam_i de la ra√≠z buscamos el elemento por la derecha con recursi√≥n.
-            // Como pasamos al hijo derecho, debemos restar la k por el tam_i de la ra√≠z, para que al bajar al hijo derecho sepa por donde tiene que ir.
+        else if (nod->tam_i < k) {          // Si la k es mayor que el tam_i de la raÌz buscamos el elemento por la derecha con recursiÛn.
+            // Como pasamos al hijo derecho, debemos restar la k por el tam_i de la raÌz, para que al bajar al hijo derecho sepa por donde tiene que ir.
             return existe(k - nod->tam_i, nod->dr);
         }
         else {
-            return nod;                     // La √∫ltima opci√≥n ser√≠a que k = nod->tam_i, por lo que quiere decir que hemos encontrado la posici√≥n.
+            return nod;                     // La ˙ltima opciÛn serÌa que k = nod->tam_i, por lo que quiere decir que hemos encontrado la posiciÛn.
         }
     }
 
-    T const& kesimo(T const& k) const {              // Funci√≥n que devuelve el k-√©simo menor elemento del conjunto.
+    T const& kesimo(T const& k) const {              // FunciÛn que devuelve el k-Èsimo menor elemento del conjunto.
         Link nodo = existe(k, raiz);                // Vemos si existe el nodo o no.
         if (nodo != nullptr) {                  // Si existe se devuelve el elemento.
             return nodo->elem;
         }
         else {
-            throw std::domain_error("Error");   // Si no existe, se lanza una excepci√≥n.
+            throw std::domain_error("Error");   // Si no existe, se lanza una excepciÛn.
         }
 
     }
@@ -164,15 +165,16 @@ protected:
         else if (menor(e, a->elem)) {
             crece = inserta(e, a->iz);
             if (crece) {
+                a->tam_i++;             // Aumentamos el valor de tam_i para mantener la coherencia, ya que este atributo contiene el n˙mero de nodos del
+                                        // hijo izquierdo m·s 1, y aquÌ al insertar un elemento en la izquierda debemos aumentar tam_i.
                 reequilibraDer(a);
-                a->tam_i++;             // Aumentamos el valor de tam_i para mantener la coherencia, ya que este atributo contiene el n√∫mero de nodos del
-            }                           // hijo izquierdo m√°s 1, y aqu√≠ al insertar un elemento en la izquierda debemos aumentar tam_i.
+            }                           
         }
         else if (menor(a->elem, e)) {
             crece = inserta(e, a->dr);
             if (crece) reequilibraIzq(a);
         }
-        else // el elemento e ya est√° en el √°rbol
+        else // el elemento e ya est· en el ·rbol
             crece = false;
         return crece;
     }
@@ -186,7 +188,7 @@ protected:
         Link r1 = r2->iz;
         r2->iz = r1->dr;
         r2->tam_i -= r1->tam_i;         // Como hemos rotado a la derecha el r1, r1 deja de ser el hijo izquierdo de r2, y r2 pasa a ser el hijo derecho de r1, entonces todo
-                                        //  lo que ten√≠a de hijo izquierdo r1, deja de formar parte del tam_i de r2, por lo que lo restamos.        
+                                        //  lo que tenÌa de hijo izquierdo r1, deja de formar parte del tam_i de r2, por lo que lo restamos.        
         r1->dr = r2;
         r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
         r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
@@ -196,7 +198,7 @@ protected:
     void rotaIzq(Link& r1) {
         Link r2 = r1->dr;
         r1->dr = r2->iz;
-        r2->tam_i += r1->tam_i;          // Ahora es al contrario, como hemos rotado r2 a la izquierda cuando r1 era la ra√≠z, siendo r2 el hijo derecho de r1, ahora r2 pasa a ser la ra√≠z
+        r2->tam_i += r1->tam_i;          // Ahora es al contrario, como hemos rotado r2 a la izquierda cuando r1 era la raÌz, siendo r2 el hijo derecho de r1, ahora r2 pasa a ser la raÌz
                                         // y r1 pasa a ser hijo izquierdo de r2, por lo que el tam_i de r1 debe sumarse al tam_i de r2.
         r2->iz = r1;
         r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
@@ -232,7 +234,7 @@ protected:
         else a->altura = std::max(altura(a->iz), altura(a->dr)) + 1;
     }
 
-    // devuelve y borra el m√≠nimo del √°rbol con ra√≠z en a
+    // devuelve y borra el mÌnimo del ·rbol con raÌz en a
     T borraMin(Link& a) {
         if (a->iz == nullptr) {
             T min = a->elem;
@@ -252,6 +254,7 @@ protected:
         if (a != nullptr) {
             if (menor(e, a->elem)) {
                 decrece = borra(e, a->iz);
+                a->tam_i--;                     // Reducimos el tamaÒo al borrar.
                 if (decrece) reequilibraIzq(a);
             }
             else if (menor(a->elem, e)) {
@@ -311,14 +314,14 @@ public:
         // construye el iterador al primero
         const_iterator(Link raiz) { act = first(raiz); }
 
-        // construye el iterador al √∫ltimo
+        // construye el iterador al ˙ltimo
         const_iterator() : act(nullptr) {}
 
         Link first(Link ptr) {
             if (ptr == nullptr) {
                 return nullptr;
             }
-            else { // buscamos el nodo m√°s a la izquierda
+            else { // buscamos el nodo m·s a la izquierda
                 while (ptr->iz != nullptr) {
                     ancestros.push(ptr);
                     ptr = ptr->iz;

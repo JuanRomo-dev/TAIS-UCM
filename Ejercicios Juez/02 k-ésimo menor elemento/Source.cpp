@@ -1,4 +1,4 @@
-
+ï»¿
 /*@ <answer>
  *
  * Nombre y Apellidos: Juan Romo Iribarren
@@ -13,16 +13,16 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
- El coste sería logarítimo O(log n), ya que en ningún momento recorremos todos los nodos en el caso peor.
- La explicación de las funciones está en TreeSet_AVL.h.
+ Escribe aquï¿½ un comentario general sobre la soluciï¿½n, explicando cï¿½mo
+ se resuelve el problema y cuï¿½l es el coste de la soluciï¿½n, en funciï¿½n
+ del tamaï¿½o del problema.
+ El coste serï¿½a logarï¿½timo O(log n), ya que en ningï¿½n momento recorremos todos los nodos en el caso peor.
+ La explicaciï¿½n de las funciones estï¿½ en TreeSet_AVL.h.
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cï¿½digo completo de tu soluciï¿½n aquï¿½ debajo
  // ================================================================
  //@ <answer>
 
@@ -61,7 +61,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lï¿½nea ya no forma parte de la soluciï¿½n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
