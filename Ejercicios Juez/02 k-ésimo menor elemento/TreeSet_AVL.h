@@ -34,8 +34,9 @@ protected:
         T elem;
         Link iz, dr;
         int altura;
+        int tam_i;                                                  // Añadimos el atributo pedido, tam_i.
         TreeNode(T const& e, Link i = nullptr, Link d = nullptr,
-            int alt = 1) : elem(e), iz(i), dr(d), altura(alt) {}
+            int alt = 1, int tamI = 1) : elem(e), iz(i), dr(d), altura(alt), tam_i(tamI) {}
     };
 
     // puntero a la raíz de la estructura jerárquica de nodos
@@ -90,6 +91,33 @@ public:
         return borra(e, raiz);
     }
 
+    Link existe(T const& k, Link nod) const {
+        if (nod == nullptr)  {              // Caso base: si la raíz es null, entonces no existe el elemento.
+            return nullptr;
+        }
+        else if (k < nod->tam_i) {          // Si la k es menor que el tam_i de la raíz buscamos el elemento por la izquierda con recursión.
+            return existe(k, nod->iz);
+        }
+        else if (nod->tam_i < k) {          // Si la k es mayor que el tam_i de la raíz buscamos el elemento por la derecha con recursión.
+            // Como pasamos al hijo derecho, debemos restar la k por el tam_i de la raíz, para que al bajar al hijo derecho sepa por donde tiene que ir.
+            return existe(k - nod->tam_i, nod->dr);
+        }
+        else {
+            return nod;                     // La última opción sería que k = nod->tam_i, por lo que quiere decir que hemos encontrado la posición.
+        }
+    }
+
+    T const& kesimo(T const& k) const {              // Función que devuelve el k-ésimo menor elemento del conjunto.
+        Link nodo = existe(k, raiz);                // Vemos si existe el nodo o no.
+        if (nodo != nullptr) {                  // Si existe se devuelve el elemento.
+            return nodo->elem;
+        }
+        else {
+            throw std::domain_error("Error");   // Si no existe, se lanza una excepción.
+        }
+
+    }
+
 protected:
 
     void copia(Set const& other) {
@@ -135,7 +163,10 @@ protected:
         }
         else if (menor(e, a->elem)) {
             crece = inserta(e, a->iz);
-            if (crece) reequilibraDer(a);
+            if (crece) {
+                reequilibraDer(a);
+                a->tam_i++;             // Aumentamos el valor de tam_i para mantener la coherencia, ya que este atributo contiene el número de nodos del
+            }                           // hijo izquierdo más 1, y aquí al insertar un elemento en la izquierda debemos aumentar tam_i.
         }
         else if (menor(a->elem, e)) {
             crece = inserta(e, a->dr);
@@ -154,6 +185,8 @@ protected:
     void rotaDer(Link& r2) {
         Link r1 = r2->iz;
         r2->iz = r1->dr;
+        r2->tam_i -= r1->tam_i;         // Como hemos rotado a la derecha el r1, r1 deja de ser el hijo izquierdo de r2, y r2 pasa a ser el hijo derecho de r1, entonces todo
+                                        //  lo que tenía de hijo izquierdo r1, deja de formar parte del tam_i de r2, por lo que lo restamos.        
         r1->dr = r2;
         r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
         r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
@@ -163,6 +196,8 @@ protected:
     void rotaIzq(Link& r1) {
         Link r2 = r1->dr;
         r1->dr = r2->iz;
+        r2->tam_i += r1->tam_i;          // Ahora es al contrario, como hemos rotado r2 a la izquierda cuando r1 era la raíz, siendo r2 el hijo derecho de r1, ahora r2 pasa a ser la raíz
+                                        // y r1 pasa a ser hijo izquierdo de r2, por lo que el tam_i de r1 debe sumarse al tam_i de r2.
         r2->iz = r1;
         r1->altura = std::max(altura(r1->iz), altura(r1->dr)) + 1;
         r2->altura = std::max(altura(r2->iz), altura(r2->dr)) + 1;
@@ -172,7 +207,7 @@ protected:
     void rotaIzqDer(Link& r3) {
         rotaIzq(r3->iz);
         rotaDer(r3);
-    }
+    }   
 
     void rotaDerIzq(Link& r1) {
         rotaDer(r1->dr);
