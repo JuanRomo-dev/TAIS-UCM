@@ -13,20 +13,20 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- Se cogen los 2 primeros valore de la cola, se suman, añadiendo la suma de vuelt aa la cola y se guarda el esfuerzo, hasta
+ Se cogen los 2 primeros valore de la cola, se suman, aÃ±adiendo la suma de vuelt aa la cola y se guarda el esfuerzo, hasta
  obtener la suma final.
 
- El coste es O(log(N) * (N*M)), siendo N el número de elementos de la cola y M el número de veces que cola tiene más de 1 elemento.
+ El coste es O(log(N) * (N*M)), siendo N el nÃºmero de elementos de la cola y M el nÃºmero de veces que cola tiene mÃ¡s de 1 elemento.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -41,8 +41,8 @@ long long int calcular(priority_queue<long long int, vector<long long int>, grea
             cola.pop();         // O(log N)     Lo quitamos de la cola
 
             a += b;             // Calculamos el esfuerzo de esta suma.
-            esfuerzo += a;      // Lo añadimos al esfurzo total de la suma de la cola.
-            cola.push(a);       // Guardamos la suma en la cola para que se acabe sumando también.
+            esfuerzo += a;      // Lo aÃ±adimos al esfurzo total de la suma de la cola.
+            cola.push(a);       // Guardamos la suma en la cola para que se acabe sumando tambiÃ©n.
         }
     }
 
@@ -65,14 +65,14 @@ bool resuelveCaso() {
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la solución
+    // escribir la soluciÃ³n
     cout << calcular(cola) << "\n";
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
