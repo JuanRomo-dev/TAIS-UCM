@@ -1,16 +1,13 @@
 
 /*@ <answer>
  *
- * Nombre y Apellidos:
+ * Nombre y Apellidos: Juan Romo Iribarren
  *
  *@ </answer> */
 
 #include <iostream>
 #include <fstream>
-#include <...>
 using namespace std;
-
-#include "..."  // propios o los de las estructuras de datos de clase
 
 /*@ <answer>
   
