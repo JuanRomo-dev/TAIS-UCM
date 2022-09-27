@@ -12,9 +12,9 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
  @ </answer> */
 
@@ -23,7 +23,7 @@ struct tarea {
 };
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -43,6 +43,113 @@ bool hayConflictos(priority_queue<tarea> cola, int t) {
             conflicto = true;
         }
         tiempo = tar.fin;
+/*@ <answer>
+ *
+ * Nombre y Apellidos: Juan Romo Iribarren
+ *
+ *@ </answer> */
+
+#include <iostream>
+#include <fstream>
+#include <queue>
+using namespace std;
+
+/*@ <answer>
+
+ Escribe aquï¿½ un comentario general sobre la soluciï¿½n, explicando cï¿½mo
+ se resuelve el problema y cuï¿½l es el coste de la soluciï¿½n, en funciï¿½n
+ del tamaï¿½o del problema.
+
+ @ </answer> */
+
+struct tarea {
+    int inicio, fin, periodo;
+};
+
+// ================================================================
+// Escribe el cï¿½digo completo de tu soluciï¿½n aquï¿½ debajo
+// ================================================================
+//@ <answer>
+
+bool operator<(tarea const& a, tarea const& b) {
+    return a.inicio < b.inicio;
+}
+
+bool hayConflictos(priority_queue<tarea> cola, int t) {                     // FunciÃ³n para ver si hay conflictos
+    bool conflicto = false;
+    int tiempo = 0;         // AquÃ­ se guarda el valor final del tiempo de un intervalo.
+
+    while (!conflicto && !cola.empty() && cola.top().inicio < t) {          // Mientras no haya conflictos, la cola no estÃ© vacÃ­a y el tiempo inicial del intervalo no supere el tiempo en el que vamos a ver si hay conflictos.
+        tarea tar = cola.top();     // Obtenemos el primer valor de la cola.
+        cola.pop();
+
+        if (tar.inicio < tiempo) {      // Si el inicio del intervalo es menor que el tiempo final del intervalo anterior, entonces hay conflicto. 
+            conflicto = true;
+        }
+        tiempo = tar.fin;               // Guardamos el valor del tiempo final del intervalo.
+        if (tar.periodo > 0) {          // Si el intervalo que vamos a mirar tiene repeticiÃ³n
+            cola.push({ tar.inicio + tar.periodo, tar.fin + tar.periodo, tar.periodo });        // Actualizamos la tarea que se repite a su siguiente intervalo.
+        }
+    }
+
+    return conflicto;
+}
+
+bool resuelveCaso() {
+
+    // leer los datos de la entrada
+    int n, m, t;    // n es el nï¿½mero de tareas ï¿½nicas, m es el nï¿½mero de tareas periï¿½dicas y t es el nï¿½mero de minutos en el que averiguar si hay conflictos.
+
+    if (!std::cin)  // fin de la entrada
+        return false;
+
+    cin >> n >> m >> t;
+
+    priority_queue<tarea> cola;
+    int ini, f, rep;
+
+    for (int i = 0; i < n; i++) {
+        cin >> ini >> f;
+        rep = 0;
+        cola.push({ ini, f, rep });
+    }
+
+    for (int i = 0; i < m; i++) {
+        cin >> ini >> f >> rep;
+        cola.push({ ini, f, rep });
+    }
+
+    // resolver el caso posiblemente llamando a otras funciones
+    // escribir la soluciï¿½n
+    if (t != 0 && hayConflictos(cola, t)) {
+        cout << "SI\n";
+    }
+    else {
+        cout << "NO\n";
+    }
+
+    return true;
+}
+
+//@ </answer>
+//  Lo que se escriba dejado de esta lï¿½nea ya no forma parte de la soluciï¿½n.
+
+int main() {
+    // ajustes para que cin extraiga directamente de un fichero
+#ifndef DOMJUDGE
+    std::ifstream in("casos.txt");
+    auto cinbuf = std::cin.rdbuf(in.rdbuf());
+#endif
+
+    while (resuelveCaso());
+
+    // para dejar todo como estaba al principio
+#ifndef DOMJUDGE
+    std::cin.rdbuf(cinbuf);
+    system("PAUSE");
+#endif
+    return 0;
+}
         if (tar.periodo > 0) {
             cola.push({ tar.inicio + tar.periodo, tar.fin + tar.periodo, tar.periodo });
         }
@@ -52,7 +159,7 @@ bool hayConflictos(priority_queue<tarea> cola, int t) {
 bool resuelveCaso() {
 
     // leer los datos de la entrada
-    int n, m, t;    // n es el número de tareas únicas, m es el número de tareas periódicas y t es el número de minutos en el que averiguar si hay conflictos.
+    int n, m, t;    // n es el nÃºmero de tareas Ãºnicas, m es el nÃºmero de tareas periÃ³dicas y t es el nÃºmero de minutos en el que averiguar si hay conflictos.
 
     if (!std::cin)  // fin de la entrada
         return false;
@@ -74,7 +181,7 @@ bool resuelveCaso() {
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la solución
+    // escribir la soluciÃ³n
     if (t != 0 && hayConflictos(cola, t)) {
         cout << "SI\n";
     }
@@ -86,7 +193,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
