@@ -12,28 +12,28 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
 class ArbolLibre {
 private:
-    vector<bool> visit;     // Para ver si el visit[v] (el vértice v) ha sido visitado o no desde el origen (es decir, si hay camino).
-    int s, tam, V, A;                 // s es el Vértice origen y tam para contar los vértices conectados, V es el número de vértices y A el número de aristas.
+    vector<bool> visit;     // Para ver si el visit[v] (el vÃ©rtice v) ha sido visitado o no desde el origen (es decir, si hay camino).
+    int s, tam, V, A;                 // s es el VÃ©rtice origen y tam para contar los vÃ©rtices conectados, V es el nÃºmero de vÃ©rtices y A el nÃºmero de aristas.
 
-    void dfs(Grafo const& g, int v) {       // Función para realizar el recorrido en profundidad.
-        visit[v] = true;                    // Marcamos el vértice v como visitado.
+    void dfs(Grafo const& g, int v) {       // FunciÃ³n para realizar el recorrido en profundidad.
+        visit[v] = true;                    // Marcamos el vÃ©rtice v como visitado.
         tam++;
-        for (int w : g.ady(v)) {            // Recorremos los vértices adyacentes a v.
-            if (!visit[w]) {                // Si el vértice no ha sido visitado, llamamos recursivamente a la función sobre ese vértice.
+        for (int w : g.ady(v)) {            // Recorremos los vÃ©rtices adyacentes a v.
+            if (!visit[w]) {                // Si el vÃ©rtice no ha sido visitado, llamamos recursivamente a la funciÃ³n sobre ese vÃ©rtice.
                 dfs(g, w);
             }
         }
@@ -45,7 +45,7 @@ public:
     }
 
     bool esArbolLibre() const {
-        return (V-1 == A) && (tam == V);    // Si los vértices visitados coinciden con el número de vértices del grafo entonces es un arbol libre.
+        return (V-1 == A) && (tam == V);    // Si los vÃ©rtices visitados coinciden con el nÃºmero de vÃ©rtices del grafo entonces es un arbol libre.
     }
 
 };
@@ -72,7 +72,7 @@ bool resuelveCaso() {
     // resolver el caso posiblemente llamando a otras funciones
     ArbolLibre arl(g, 0);
 
-    // escribir la solución
+    // escribir la soluciÃ³n
     bool esArbolLibre = true;
     for (int i = 0; i < g.V(); i++) {
         if (!arl.esArbolLibre()) {
@@ -91,7 +91,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
