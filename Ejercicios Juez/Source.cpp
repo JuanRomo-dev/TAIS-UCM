@@ -1,5 +1,4 @@
-
-/*@ <answer>
+ï»¿/*@ <answer>
  *
  * Nombre y Apellidos: Juan Romo Iribarren
  *
@@ -13,62 +12,90 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquï¿½ un comentario general sobre la soluciï¿½n, explicando cï¿½mo
+ se resuelve el problema y cuï¿½l es el coste de la soluciï¿½n, en funciï¿½n
+ del tamaï¿½o del problema.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cï¿½digo completo de tu soluciï¿½n aquï¿½ debajo
  // ================================================================
  //@ <answer>
 
 class UsuariosNoticia {
 public:
-    UsuariosNoticia(Grafo const& g) : visitados(g.V(), false) {
-
+    UsuariosNoticia(Grafo const& g) : visitados(g.V(), false), nUsuarios(g.V()) {       // Constructora de la clase.
+        int i = 0;                          // 
+        for (int v = 0; v < g.V(); v++) {   // Recorremos los vÃ©rtices del grafo 
+            if (!visitados[v]) {
+                int tam = dfs(g, v, i);
+                amigos.push_back(tam);
+                i++;
+            }
+        }   
     }
+    int getAmigos(int v) {
+        return amigos[nUsuarios[v]];
+    }
+
 private:
     vector<bool> visitados;
-    int dfs() {
+    vector<int> nUsuarios;
+    vector<int> amigos;
 
+    int dfs(Grafo const& g, int v, int i) {
+        visitados[v] = true;
+        nUsuarios[v] = i;
+        int tam = 1;
+        for (int w : g.ady(v)) {
+            if (!visitados[w]) {
+                tam += dfs(g, w, i);
+            }
+        }
+        return tam;
     }
 };
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N, M;          // N es el número de usuarios de la red y M es el número de grupos;
+    int N, M;          // N es el nï¿½mero de usuarios de la red y M es el nï¿½mero de grupos;
 
     cin >> N >> M;
     if (!std::cin)  // fin de la entrada
         return false;
 
-    int nUsuarios, aux, anterior;       // nUsuarios es el número de usuarios de un grupo, aux para leer cada miembro del grupo y en anterior se va guardando el usuario leído antes para poder unir aristas.
+    int nUsuarios, aux, anterior;       // nUsuarios es el nï¿½mero de usuarios de un grupo, aux para leer cada miembro del grupo y en anterior se va guardando el usuario leï¿½do antes para poder unir aristas.
     Grafo g(N);
-    for (int i = 0; i < M; i++) {       // Recorremos el número de grupos.
+    for (int i = 0; i < M; i++) {       // Recorremos el nï¿½mero de grupos.
         cin >> nUsuarios;
         if (nUsuarios != 0) {
             cin >> anterior;            // Leemos el primer miembro del grupo
         }
-        for (int j = 1; j < nUsuarios; j++) {
+        for (int j = 1; j < nUsuarios; j++) {   // Vamos leyendo los miembros restantes del grupo
             cin >> aux;
-            g.ponArista(anterior - 1, aux - 1);
+            g.ponArista(anterior - 1, aux - 1); // Ponemos una arista entre cada miembro consecutivo.
             anterior = aux;
         }
     }
+    // No es necesario colocar aristas entre cada uno de los miembros de un grupo con el resto, pues si vamos colocando aristas entre
+    // cada miembro consecutivo, los anteriores nodos ya estÃ¡n unidos a travÃ©s de un camino.
 
     // resolver el caso posiblemente llamando a otras funciones
     UsuariosNoticia uNoticia(g);
 
-    // escribir la solución
+    // escribir la soluciï¿½n
+    for (int i = 0; i < N; i++) {
+        cout << uNoticia.getAmigos(i) << " ";
+    }
+    cout << '\n';
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lï¿½nea ya no forma parte de la soluciï¿½n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
