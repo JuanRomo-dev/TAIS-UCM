@@ -16,6 +16,17 @@ using namespace std;
  se resuelve el problema y cu�l es el coste de la soluci�n, en funci�n
  del tama�o del problema.
 
+ En este ejercicio, teníamos que mirar por cada usuario i-ésimo dados (1, 2, 3...), si el difunde una noticia, contar cuántos usuarios van a llegar a conocerla.
+ La manera de conocer una noticia es estando en el mismo grupo que el usuario que difunde la noticia. Por tanto vamos a utilizar la clase Grafo.h para representar estas
+ conexiones entre grupos. Los vértices del grafo serán los usuarios, mientras que las aristas representan si un grafo y otro están en el mismo grupo. De todas formas, no
+ es totalmente necesario que 2 vértices estén directamente unidas por una arista, pues si se puede trazar un camino del vértice origen a otro lejano, atravesando otros vértices
+ y aristas quiere decir que también forma parte de ese grupo. Por tanto, iremos comprobando en la clase UsuariosNoticia para cada usuario i-ésimo cuantos usuarios conocen la noticia.
+ Recorremos los vértices del grafo y por cada vértice, se realiza una búsqueda en profundidad, en la cuál guardaremos en el vector nUsuarios el usuario i-ésimo que estamos 
+ consultando en ese momento y miraremos los adyecentes a ese vértice, para así contar el tamaño de usuarios que han llegado a conocer la noticia. Guardaremos el tamaño por cada 
+ usuario en el vector amigos.
+
+ En cuanto al coste del algortimo es O(V + A), donde V es el número de vértices y A es el número de aristas.
+
  @ </answer> */
 
 
@@ -27,31 +38,31 @@ using namespace std;
 class UsuariosNoticia {
 public:
     UsuariosNoticia(Grafo const& g) : visitados(g.V(), false), nUsuarios(g.V()) {       // Constructora de la clase.
-        int i = 0;                          // 
+        int i = 0;                          // i lleva la cuenta del usuario que está difundiendo la noticia en ese momento.
         for (int v = 0; v < g.V(); v++) {   // Recorremos los vértices del grafo 
-            if (!visitados[v]) {
-                int tam = dfs(g, v, i);
-                amigos.push_back(tam);
-                i++;
+            if (!visitados[v]) {            // Si ese vértice aún no ha sido visitado
+                int tam = dfs(g, v, i);     // Calculamos con la búsqueda en profundidad cuántos usuarios acabarán conociendo la noticia si la difunde el usuario i.
+                amigos.push_back(tam);      // Guardamos en el vector de amigos el número de usuarios que acabarán conociendo la noticia.
+                i++;                        // Pasamos al siguiente usuario.
             }
-        }   
+        }
     }
-    int getAmigos(int v) {
+    int getAmigos(int v) {                  // Para acceder al número de usuarios conocedores de la noticia que tiene el vértice v que difunde la noticia recibido por parámetro.
         return amigos[nUsuarios[v]];
     }
 
 private:
-    vector<bool> visitados;
-    vector<int> nUsuarios;
-    vector<int> amigos;
+    vector<bool> visitados;             // Vector para marcar los vértices ya explorados en dfs.
+    vector<int> nUsuarios;              // Vector que contiene el número de usuarios i-ésimo (cada uno dinfunde la noticia).
+    vector<int> amigos;                 // Vector donde se guardan los tamaños del grupo de cada usuario
 
-    int dfs(Grafo const& g, int v, int i) {
-        visitados[v] = true;
-        nUsuarios[v] = i;
+    int dfs(Grafo const& g, int v, int i) {     // Búsqueda en profundidad.
+        visitados[v] = true;            // Marcamos el vértice v como visitado.
+        nUsuarios[v] = i;               // Guardamos el usuario que difunde la noticia en el vector nUsuarios.
         int tam = 1;
-        for (int w : g.ady(v)) {
-            if (!visitados[w]) {
-                tam += dfs(g, w, i);
+        for (int w : g.ady(v)) {        // Miramos los adyacentes de v
+            if (!visitados[w]) {        // Si el vértice adyacente a v, w no ha sido visitado
+                tam += dfs(g, w, i);    // Seguimos buscando recursivamente en w con dfs, guardando el tamaño de todos los conectados al v original.
             }
         }
         return tam;
