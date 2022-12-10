@@ -1,4 +1,4 @@
-/*@ <answer>
+ï»¿/*@ <answer>
  *
  * Nombre y Apellidos: Juan Romo Iribarren
  *
@@ -13,102 +13,94 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquï¿½ un comentario general sobre la soluciï¿½n, explicando cï¿½mo
+ se resuelve el problema y cuï¿½l es el coste de la soluciï¿½n, en funciï¿½n
+ del tamaï¿½o del problema.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cï¿½digo completo de tu soluciï¿½n aquï¿½ debajo
  // ================================================================
  //@ <answer>
 
 class Tareas {
 public:
-    Tareas(Digrafo const& dig) : visit(dig.V(), false), ant(dig.V()), apilado(dig.V(), false), hayCiclo(false), posibleOrdenar(false) {
+    Tareas(Digrafo const& dig) : visit(dig.V(), false), apilado(dig.V(), false), hayCiclo(false) {
         for (int i = 0; i < dig.V(); i++) {
             if (!visit[i]) {
-                posibleOrdenar = dfs(dig, i);
+                dfs(dig, i);
             }
         }
     }
-    bool esPosible() {
-        return posibleOrdenar;
+
+    bool ciclo() {
+        return hayCiclo;
     }
 
-    deque<int> const& ordenTareas() {
+    deque<int> const& ordenTareas() const {
         return _orden;
     }
 
 private:
     vector<bool> visit;
-    vector<int> ant;
     vector<bool> apilado;
     deque<int> _orden;
     bool hayCiclo;
-    bool posibleOrdenar;
 
-    bool dfs(Digrafo const& dig, int v) {
-        visit[v] = true;
+    void dfs(Digrafo const& dig, int v) {
         apilado[v] = true;
+        visit[v] = true;
         for (int w : dig.ady(v)) {
             if (hayCiclo) {
-                return false;
+                return;
             }
             if (!visit[w]) {
-                ant[w] = v;
                 dfs(dig, w);
             }
             else if (apilado[w]) {
-                hayCiclo = true; 
+                hayCiclo = true;
             }
         }
-        apilado[v] = false;
         _orden.push_front(v);
-
-        return true;
+        apilado[v] = false;
     }
 };
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N;          // Número de tareas a realizar.
+    int N, M;          // N Nï¿½mero de tareas a realizar. M Relaciones de dependencia
 
-    cin >> N;
+    cin >> N >> M;
     if (!std::cin)  // fin de la entrada
         return false;
 
-    int M;          // Relaciones de dependencia 
-    cin >> M;
-
     Digrafo dig(M);
-    int v, w;
     for (int i = 0; i < M; i++) {
+        int v, w;
         cin >> v >> w;
-        dig.ponArista(v, w);
+        dig.ponArista(v-1, w-1);
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la solución
+    // escribir la soluciï¿½n
     Tareas t(dig);
-    if (t.esPosible()) {
-        deque<int> ordenT = t.ordenTareas();
-        for (int i = 0; i < ordenT.size(); i++) {
-            cout << ordenT[i] << " ";
+    if (!t.ciclo()) {
+        for (int i : t.ordenTareas()) {
+            cout << i + 1 << " ";
         }
-        cout << '\n';
     }
     else {
         cout << "Imposible";
     }
+    cout << '\n';
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lï¿½nea ya no forma parte de la soluciï¿½n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
