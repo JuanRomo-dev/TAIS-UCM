@@ -12,20 +12,20 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
  Debemos buscar en profundidad para probar si es posible realizar todas las tareas, de tal forma que
- se respeten todas las dependencias, y aquellos vértices que no tengan aristas dirigidas se guardan en una cola.
+ se respeten todas las dependencias, y aquellos vÃ©rtices que no tengan aristas dirigidas se guardan en una cola.
  
- El coste del algoritmo es O(V+A), donde V es el número de vértices del grafo y A el número de aristas.
+ El coste del algoritmo es O(V+A), donde V es el nÃºmero de vÃ©rtices del grafo y A el nÃºmero de aristas.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -73,7 +73,7 @@ private:
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N, M;          // N Número de tareas a realizar. M Relaciones de dependencia.
+    int N, M;          // N NÃºmero de tareas a realizar. M Relaciones de dependencia.
 
     cin >> N >> M;
     if (!std::cin)  // fin de la entrada
@@ -88,7 +88,7 @@ bool resuelveCaso() {
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la solución
+    // escribir la soluciÃ³n
     Tareas t(dig);
     if (!t.existeCiclo()) {
         for (int c : t.ordenTareas()) {
@@ -104,7 +104,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
