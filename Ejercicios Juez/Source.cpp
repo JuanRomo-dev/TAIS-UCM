@@ -1,4 +1,4 @@
-ï»¿/*@ <answer>
+/*@ <answer>
  *
  * Nombre y Apellidos: Juan Romo Iribarren
  *
@@ -7,21 +7,25 @@
 #include <iostream>
 #include <fstream>
 #include "Digrafo.h"
-#include <vector>
-#include <deque>
+#include <queue>
 using namespace std;
 
 /*@ <answer>
 
- Escribe aquï¿½ un comentario general sobre la soluciï¿½n, explicando cï¿½mo
- se resuelve el problema y cuï¿½l es el coste de la soluciï¿½n, en funciï¿½n
- del tamaï¿½o del problema.
+ Escribe aquí un comentario general sobre la solución, explicando cómo
+ se resuelve el problema y cuál es el coste de la solución, en función
+ del tamaño del problema.
+
+ Debemos buscar en profundidad para probar si es posible realizar todas las tareas, de tal forma que
+ se respeten todas las dependencias, y aquellos vértices que no tengan aristas dirigidas se guardan en una cola.
+ 
+ El coste del algoritmo es O(V+A), donde V es el número de vértices del grafo y A el número de aristas.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el cï¿½digo completo de tu soluciï¿½n aquï¿½ debajo
+ // Escribe el código completo de tu solución aquí debajo
  // ================================================================
  //@ <answer>
 
@@ -34,8 +38,7 @@ public:
             }
         }
     }
-
-    bool ciclo() {
+    bool existeCiclo() const {
         return hayCiclo;
     }
 
@@ -50,8 +53,8 @@ private:
     bool hayCiclo;
 
     void dfs(Digrafo const& dig, int v) {
-        apilado[v] = true;
         visit[v] = true;
+        apilado[v] = true;
         for (int w : dig.ady(v)) {
             if (hayCiclo) {
                 return;
@@ -60,23 +63,24 @@ private:
                 dfs(dig, w);
             }
             else if (apilado[w]) {
-                hayCiclo = true;
+                hayCiclo = true; 
             }
         }
-        _orden.push_front(v);
         apilado[v] = false;
+        _orden.push_front(v);
     }
 };
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N, M;          // N Nï¿½mero de tareas a realizar. M Relaciones de dependencia
+    int N, M;          // N Número de tareas a realizar. M Relaciones de dependencia.
 
     cin >> N >> M;
     if (!std::cin)  // fin de la entrada
         return false;
 
-    Digrafo dig(M);
+    Digrafo dig(N);
+    
     for (int i = 0; i < M; i++) {
         int v, w;
         cin >> v >> w;
@@ -84,23 +88,23 @@ bool resuelveCaso() {
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la soluciï¿½n
+    // escribir la solución
     Tareas t(dig);
-    if (!t.ciclo()) {
-        for (int i : t.ordenTareas()) {
-            cout << i + 1 << " ";
+    if (!t.existeCiclo()) {
+        for (int c : t.ordenTareas()) {
+            cout << c + 1 << " ";
         }
     }
     else {
         cout << "Imposible";
     }
     cout << '\n';
-
+        
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta lï¿½nea ya no forma parte de la soluciï¿½n.
+//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
