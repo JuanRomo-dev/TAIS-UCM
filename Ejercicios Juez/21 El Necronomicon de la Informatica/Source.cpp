@@ -11,24 +11,24 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- Para resoslver el problema, se realiza una búsqueda en profundidad, en la cuál se verá si un programa puede terminar. Si nunca se llega a visitar el último nodo,
- quiere decir que la instrucción no se ha ejecutado, por lo que NUNCA terminaría el programa. En el caso de detectarse un ciclo, a través del vector apilado, el
- programa terminará a veces ya que se trataría de una instrucción de salto condicional, que dependiendo de si se realiza el salto o no, se produciría el ciclo o no, 
- por lo que el programa terminaría A VECES. En cualquier otro caso, todas las instrucciones se han ejecutado correctamente, al haber sido visitados todos los nodos del
- grafo dirigido, por lo que el programa terminaría SIEMPRE.
+ Para resoslver el problema, se realiza una bÃºsqueda en profundidad, en la cuÃ¡l se verÃ¡ si un programa puede terminar. Si nunca se llega a visitar el Ãºltimo nodo,
+ quiere decir que la instrucciÃ³n no se ha ejecutado, por lo que NUNCA terminarÃ­a el programa. En el caso de detectarse un ciclo, a travÃ©s del vector apilado, el
+ programa terminarÃ¡ a veces ya que se tratarÃ­a de una instrucciÃ³n de salto condicional, que dependiendo de si se realiza el salto o no, se producirÃ­a el ciclo o no, 
+ por lo que el programa terminarÃ­a A VECES. En cualquier otro caso, todas las instrucciones se han ejecutado correctamente, al haber sido visitados todos los nodos del
+ grafo dirigido, por lo que el programa terminarÃ­a SIEMPRE.
 
- En cuanto al coste en el peor caso es O(L), donde L es el número de instrucciones, en el cuál el número de aristas podría llegar a ser 2L si todas las instrucciones
+ En cuanto al coste en el peor caso es O(L), donde L es el nÃºmero de instrucciones, en el cuÃ¡l el nÃºmero de aristas podrÃ­a llegar a ser 2L si todas las instrucciones
  son de salto condicional, pero en complejidad 2L = L.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -36,7 +36,7 @@ class programa {
 public:
     programa(Digrafo const& dig) : visit(dig.V(), false), apilado(dig.V(), false), hayCiclo(false), tipoPrograma(0) {
         dfs(dig, 0);
-        if (visit[dig.V() - 1]) {   // Si hemos llegado a la última instrucción, quiere decir que el programa podría llegar a finalizar.
+        if (visit[dig.V() - 1]) {   // Si hemos llegado a la Ãºltima instrucciÃ³n, quiere decir que el programa podrÃ­a llegar a finalizar.
             if (hayCiclo) {         // Dependiendo de si hay ciclo o no, el programa es de un tipo u otro.
                 tipoPrograma = 1;
             }
@@ -51,16 +51,16 @@ public:
     }
 
 private:
-    vector<bool> visit;             // Para marcar los vértices ya visitados.
+    vector<bool> visit;             // Para marcar los vÃ©rtices ya visitados.
     vector<bool> apilado;           // Para detectar ciclos.
     int tipoPrograma;               // 0 si el programa nunca acaba, 1 si a veces y 2 si siempre.
     bool hayCiclo;                  // Guarda si hay un ciclo o no.
 
-    void dfs(Digrafo const& dig, int v) {       // Búsqueda en profundidad.
-        visit[v] = true;            // Marcamos el vértice v como visitado      
+    void dfs(Digrafo const& dig, int v) {       // BÃºsqueda en profundidad.
+        visit[v] = true;            // Marcamos el vÃ©rtice v como visitado      
         apilado[v] = true;          // Apilamos v
         for (int w : dig.ady(v)) {  // Recorremos los adyacentes a v.
-            if (!visit[w]) {        // Si w no ha sido visitado continuamos la búsqueda en profundidad
+            if (!visit[w]) {        // Si w no ha sido visitado continuamos la bÃºsqueda en profundidad
                 dfs(dig, w);
             }
             else if (apilado[w]) {  // Si ya estaba w apilado, entonces se produce un ciclo.
@@ -73,7 +73,7 @@ private:
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int L;                  // Número de instrucciones.
+    int L;                  // NÃºmero de instrucciones.
 
     cin >> L;
     if (!std::cin)  // fin de la entrada
@@ -84,14 +84,14 @@ bool resuelveCaso() {
     int salto;
     for (int i = 0; i < L; i++) {       
         cin >> c;
-        if (c == 'A') {                 // Si la instrucción es aritmética, avanza a la siguiente instrucción.
+        if (c == 'A') {                 // Si la instrucciÃ³n es aritmÃ©tica, avanza a la siguiente instrucciÃ³n.
             necronomicon.ponArista(i, i + 1);
         }
-        else if (c == 'J') {            // Si la instrucción es un salto, avanza a la instrucción "salto".
+        else if (c == 'J') {            // Si la instrucciÃ³n es un salto, avanza a la instrucciÃ³n "salto".
             cin >> salto;
             necronomicon.ponArista(i, salto);
         }
-        else if (c == 'C') {            // Si la instrucción es un salto condicional, puede avanzar a la siguiente instrucción, o saltar a la instrucción salto.
+        else if (c == 'C') {            // Si la instrucciÃ³n es un salto condicional, puede avanzar a la siguiente instrucciÃ³n, o saltar a la instrucciÃ³n salto.
             cin >> salto;
             necronomicon.ponArista(i, i + 1);
             necronomicon.ponArista(i, salto);
@@ -101,7 +101,7 @@ bool resuelveCaso() {
     // resolver el caso posiblemente llamando a otras funciones
     programa p(necronomicon);
 
-    // escribir la solución
+    // escribir la soluciÃ³n
     if (p.tipo() == 0) {
         cout << "NUNCA";
     }
@@ -117,7 +117,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
