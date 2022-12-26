@@ -12,17 +12,17 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- El coste en el peor caso es O(N^2 + K * N^2), donde N es el tamaño de las dimensiones de la matriz y K es el numero de caras del dado.
+ El coste en el peor caso es O(N^2 + K * N^2), donde N es el tamaÃ±o de las dimensiones de la matriz y K es el numero de caras del dado.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -34,7 +34,7 @@ int resolver(unordered_map<int, int> extremos, int N, int K, int S, int E) {
     cola.push(1);
     distancia[1] = 0;
 
-    while (!cola.empty()) {             // Realizamos una búsqueda en profundiad (BFS), probando con el dado según sus caras el camino más corto.
+    while (!cola.empty()) {             // Realizamos una bÃºsqueda en profundiad (BFS), probando con el dado segÃºn sus caras el camino mÃ¡s corto.
         int posicion = cola.front();
         cola.pop();
 
@@ -56,7 +56,7 @@ int resolver(unordered_map<int, int> extremos, int N, int K, int S, int E) {
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N, K, S, E;         // N es la dimensión del tablero, K el número de caras del dado, S el número de serpientes y E el número de escaleras.
+    int N, K, S, E;         // N es la dimensiÃ³n del tablero, K el nÃºmero de caras del dado, S el nÃºmero de serpientes y E el nÃºmero de escaleras.
 
     cin >> N >> K >> S >> E;
     if (N == 0 && K == 0 && S == 0 && E == 0)
@@ -70,14 +70,14 @@ bool resuelveCaso() {
         extremos.insert({ v, w });
     }
 
-    // escribir la solución
+    // escribir la soluciÃ³n
     cout << resolver(extremos, N, K, S, E) << '\n';
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
