@@ -12,22 +12,22 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- Debemos realizar una búsqueda en profundidad (dfs) para encontrar un vértice sumidero, es decir, que su grado de entrada sea V - 1 (que todos los demás vértices apunten
- hacia él, y qye su grado de salida sea 0 (que el vértice no apunte a ningún otro). Para hallar si es sumidero o no, en la clase Sumidero, al realizar la dfs, buscaremos
- vértices que tengan la lista de adyacentes vacía, e iremos viendo si cada vértice tiene al original de adyacente, sumando el grado de entrada del vértice en vector
- llamado gradoV, donde cada posición del vector indica el vértice por el número.
+ Debemos realizar una bÃºsqueda en profundidad (dfs) para encontrar un vÃ©rtice sumidero, es decir, que su grado de entrada sea V - 1 (que todos los demÃ¡s vÃ©rtices apunten
+ hacia Ã©l, y qye su grado de salida sea 0 (que el vÃ©rtice no apunte a ningÃºn otro). Para hallar si es sumidero o no, en la clase Sumidero, al realizar la dfs, buscaremos
+ vÃ©rtices que tengan la lista de adyacentes vacÃ­a, e iremos viendo si cada vÃ©rtice tiene al original de adyacente, sumando el grado de entrada del vÃ©rtice en vector
+ llamado gradoV, donde cada posiciÃ³n del vector indica el vÃ©rtice por el nÃºmero.
 
- Por otro lado, en cuanto al coste del algoritmo es O(V+A), donde V es el número de vértices y A el número de aristas.
+ Por otro lado, en cuanto al coste del algoritmo es O(V+A), donde V es el nÃºmero de vÃ©rtices y A el nÃºmero de aristas.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -36,8 +36,8 @@ public:
     Sumidero(Digrafo const& dig) : visit(dig.V(), false), gradoV(dig.V()) {
         sumidero = false;
         solucion = -1;
-        for (int i = 0; i < dig.V(); i++) {                                     // Recorremos todos los vértices del grafo.
-            if (!visit[i]) {                                                    // Si no ha sido visitado realizamos la búsqueda en profundidad.
+        for (int i = 0; i < dig.V(); i++) {                                     // Recorremos todos los vÃ©rtices del grafo.
+            if (!visit[i]) {                                                    // Si no ha sido visitado realizamos la bÃºsqueda en profundidad.
                 dfs(dig, i);
             }
         }
@@ -55,19 +55,19 @@ public:
     }
 
 private:
-    vector<bool> visit;         // Para marcar los vértices que ya han sido visitados.
-    bool sumidero;              // Para marcar si el vértice es sumidero o no.
-    vector<int> gradoV;         // Para guardar el valor del grado de entrada de cada vértice.
-    int solucion;               // Para guardar la posible solución del vértice.
+    vector<bool> visit;         // Para marcar los vÃ©rtices que ya han sido visitados.
+    bool sumidero;              // Para marcar si el vÃ©rtice es sumidero o no.
+    vector<int> gradoV;         // Para guardar el valor del grado de entrada de cada vÃ©rtice.
+    int solucion;               // Para guardar la posible soluciÃ³n del vÃ©rtice.
 
     void dfs(Digrafo const& dig, int v) {
-        visit[v] = true;            // Marcamos el vértice como visitado.
-        if (dig.ady(v).size() == 0) {   // Si el grado de salida de v es 0, entonces es una posible solución.
+        visit[v] = true;            // Marcamos el vÃ©rtice como visitado.
+        if (dig.ady(v).size() == 0) {   // Si el grado de salida de v es 0, entonces es una posible soluciÃ³n.
             solucion = v;
         }
         for (int w : dig.ady(v)) {  // Recorremos sus adyacentes.
             gradoV[w]++;            // Incrementamos el valor del grado de entrada.
-            if (!visit[w]) {        // Si w no ha sido visitado realizamos la llamada recursiva para continuar la búsqueda en profundidad.
+            if (!visit[w]) {        // Si w no ha sido visitado realizamos la llamada recursiva para continuar la bÃºsqueda en profundidad.
                 dfs(dig, w);        
             }
         }
@@ -76,7 +76,7 @@ private:
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int V, A;       // Número de vértices y aristas 
+    int V, A;       // NÃºmero de vÃ©rtices y aristas 
 
     cin >> V >> A;
     if (!std::cin)  // fin de la entrada
@@ -92,7 +92,7 @@ bool resuelveCaso() {
     // resolver el caso posiblemente llamando a otras funciones
     Sumidero s(dig);
 
-    // escribir la solución
+    // escribir la soluciÃ³n
     if (s.tieneSumidero()) {
         cout << "SI " << s.sol();
     }
@@ -105,7 +105,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
