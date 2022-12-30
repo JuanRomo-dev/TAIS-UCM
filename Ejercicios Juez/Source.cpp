@@ -16,7 +16,7 @@ using namespace std;
  se resuelve el problema y cuál es el coste de la solución, en función
  del tamaño del problema.
 
- El coste de la función en el caso peor es O(F*C), donde F es el número de filas y C el número de columnas
+ El coste de la función en el caso peor es O(F*C), donde F es el número de filas y C el número de columnas.
 
  @ </answer> */
 
