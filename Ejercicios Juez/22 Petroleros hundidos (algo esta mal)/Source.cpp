@@ -12,17 +12,17 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- El coste de la función en el caso peor es O(F*C), donde F es el número de filas y C el número de columnas.
+ El coste de la funciÃ³n en el caso peor es O(F*C), donde F es el nÃºmero de filas y C el nÃºmero de columnas.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -31,7 +31,7 @@ const vector<std::pair<int, int>> direcciones = { {0, 1}, {0, -1}, {1, 0}, {-1, 
 bool resuelveCaso() {
     // leer los datos de la entrada
 
-    int F, C;       // Número de filas y de columnas.
+    int F, C;       // NÃºmero de filas y de columnas.
 
     cin >> F >> C;
     if (!std::cin)  // fin de la entrada
@@ -50,13 +50,13 @@ bool resuelveCaso() {
             if (aux.at(j) == '#') {
                 mapa[i][j] = '#';
                 mancha = true;      // Hemos encontrado una mancha
-                int pos = (i * C + j);          // Obtenemos la posición de i, j.
-                for (auto d : direcciones) {    // Recorremos las celdas adyacentes a la celda [i][j] para ver si está unida a alguna mancha.
+                int pos = (i * C + j);          // Obtenemos la posiciÃ³n de i, j.
+                for (auto d : direcciones) {    // Recorremos las celdas adyacentes a la celda [i][j] para ver si estÃ¡ unida a alguna mancha.
                     int fila = i + d.first;
                     int col = j + d.second;
-                    int pos2 = fila * C + col;      // Obtenemos la posición de la adyacente.
-                    if (fila >= 0 && fila < F && col >= 0 && col < C && mapa[fila][col] == "#" && !conjuntos.unidos(pos, pos2)) {   // Comprobamos que se encuentren dentro del rango, que sea una mancha y que no estén unidas las posiciones.
-                        conjuntos.unir(pos, pos2);      // Unimos las celdas ya que están en la misma mancha.
+                    int pos2 = fila * C + col;      // Obtenemos la posiciÃ³n de la adyacente.
+                    if (fila >= 0 && fila < F && col >= 0 && col < C && mapa[fila][col] == "#" && !conjuntos.unidos(pos, pos2)) {   // Comprobamos que se encuentren dentro del rango, que sea una mancha y que no estÃ©n unidas las posiciones.
+                        conjuntos.unir(pos, pos2);      // Unimos las celdas ya que estÃ¡n en la misma mancha.
                         maximo = max(maximo, conjuntos.cardinal(pos) -1);
                     }
                 }
@@ -67,12 +67,12 @@ bool resuelveCaso() {
         }
     }
 
-    if (maximo == 0 && mancha) {    // Si se ha encontrado una mancha de sólo una celda.
+    if (maximo == 0 && mancha) {    // Si se ha encontrado una mancha de sÃ³lo una celda.
         maximo = 1;
     }
     cout << maximo  << " "; 
 
-        int N;      // Número de imágenes adicionales tomadas.
+        int N;      // NÃºmero de imÃ¡genes adicionales tomadas.
         cin >> N;
         if (maximo == 0 && N > 0) maximo = 1;
         for (int i = 0; i < N; i++) {
@@ -81,13 +81,13 @@ bool resuelveCaso() {
             f--;
             c--;
             mapa[f][c] = "#";       // Marcamos la celda.
-            int pos = f * C + c;        // Obtenemos la posición
-            for (auto d : direcciones) {    // Recorremos las celdas adyacentes a la celda [f][c] para ver si está unida a alguna mancha.
+            int pos = f * C + c;        // Obtenemos la posiciÃ³n
+            for (auto d : direcciones) {    // Recorremos las celdas adyacentes a la celda [f][c] para ver si estÃ¡ unida a alguna mancha.
                 int fila = f + d.first;
                 int col = c + d.second;
-                int pos2 = fila * C + col;      // Obtenemos la posición de la adyacente.
-                if (fila >= 0 && fila < F && col >= 0 && col < C && mapa[fila][col] == "#" && !conjuntos.unidos(pos, pos2)) {   // Comprobamos que se encuentren dentro del rango, que sea una mancha y que no estén unidas las posiciones.
-                    conjuntos.unir(pos, pos2);      // Unimos las celdas ya que están en la misma mancha.
+                int pos2 = fila * C + col;      // Obtenemos la posiciÃ³n de la adyacente.
+                if (fila >= 0 && fila < F && col >= 0 && col < C && mapa[fila][col] == "#" && !conjuntos.unidos(pos, pos2)) {   // Comprobamos que se encuentren dentro del rango, que sea una mancha y que no estÃ©n unidas las posiciones.
+                    conjuntos.unir(pos, pos2);      // Unimos las celdas ya que estÃ¡n en la misma mancha.
                     maximo = max(maximo, conjuntos.cardinal(pos));
                 }
             }
@@ -99,7 +99,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
