@@ -13,9 +13,9 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquÌ un comentario general sobre la soluciÛn, explicando cÛmo
- se resuelve el problema y cu·l es el coste de la soluciÛn, en funciÛn
- del tamaÒo del problema.
+ Escribe aqu√≠ un comentario general sobre la soluci√≥n, explicando c√≥mo
+ se resuelve el problema y cu√°l es el coste de la soluci√≥n, en funci√≥n
+ del tama√±o del problema.
 
  Coste: O(A * log(V))
 
@@ -23,7 +23,7 @@ using namespace std;
 
 
  // ================================================================
- // Escribe el cÛdigo completo de tu soluciÛn aquÌ debajo
+ // Escribe el c√≥digo completo de tu soluci√≥n aqu√≠ debajo
  // ================================================================
  //@ <answer>
 
@@ -67,7 +67,7 @@ private:
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N, C;      // Numero de intersecciones y n˙mero de calles.
+    int N, C;      // Numero de intersecciones y n√∫mero de calles.
 
     cin >> N >> C;
 
@@ -82,7 +82,7 @@ bool resuelveCaso() {
     }
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la soluciÛn
+    // escribir la soluci√≥n
     Colegio cole(g);
 
     cout << cole.distanciaMin() << '\n';
@@ -91,7 +91,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta lÌnea ya no forma parte de la soluciÛn.
+//  Lo que se escriba dejado de esta l√≠nea ya no forma parte de la soluci√≥n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
