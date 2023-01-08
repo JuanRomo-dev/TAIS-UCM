@@ -13,15 +13,15 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquÌ un comentario general sobre la soluciÛn, explicando cÛmo
- se resuelve el problema y cu·l es el coste de la soluciÛn, en funciÛn
- del tamaÒo del problema.
+ Escribe aqu√≠ un comentario general sobre la soluci√≥n, explicando c√≥mo
+ se resuelve el problema y cu√°l es el coste de la soluci√≥n, en funci√≥n
+ del tama√±o del problema.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el cÛdigo completo de tu soluciÛn aquÌ debajo
+ // Escribe el c√≥digo completo de tu soluci√≥n aqu√≠ debajo
  // ================================================================
  //@ <answer>
 
@@ -63,7 +63,7 @@ private:
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N;      // N˙mero de p·ginas manejadas.
+    int N;      // N√∫mero de p√°ginas manejadas.
 
     cin >> N;
     if (N == 0)
@@ -74,11 +74,11 @@ bool resuelveCaso() {
         cin >> tiemposCarga[i];
     }
 
-    int M;      // N˙mero de enlaces entre p·ginas que se han identificado.
+    int M;      // N√∫mero de enlaces entre p√°ginas que se han identificado.
     cin >> M;
 
     DigrafoValorado<int> grafo(N);
-    int u, v, tiempo;       // P·gina en la que se encuentra, p·gina a la que se va y tiempo que pasa desde que carga la p·gina hasta que se encuentra el enlace.
+    int u, v, tiempo;       // P√°gina en la que se encuentra, p√°gina a la que se va y tiempo que pasa desde que carga la p√°gina hasta que se encuentra el enlace.
 
     for (int i = 0; i < M; i++) {
         cin >> u >> v >> tiempo;
@@ -88,7 +88,7 @@ bool resuelveCaso() {
     Navegar nav(grafo, tiemposCarga);
 
     // resolver el caso posiblemente llamando a otras funciones
-    // escribir la soluciÛn
+    // escribir la soluci√≥n
     if (nav.hayCamino()) {
         cout << nav.tiempoNavegacion();
     }
@@ -101,7 +101,7 @@ bool resuelveCaso() {
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta lÌnea ya no forma parte de la soluciÛn.
+//  Lo que se escriba dejado de esta l√≠nea ya no forma parte de la soluci√≥n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
