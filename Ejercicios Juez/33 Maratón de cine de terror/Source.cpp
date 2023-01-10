@@ -12,17 +12,17 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquí un comentario general sobre la solución, explicando cómo
- se resuelve el problema y cuál es el coste de la solución, en función
- del tamaño del problema.
+ Escribe aquÃ­ un comentario general sobre la soluciÃ³n, explicando cÃ³mo
+ se resuelve el problema y cuÃ¡l es el coste de la soluciÃ³n, en funciÃ³n
+ del tamaÃ±o del problema.
 
- El coste es o(n), donde n es el número de películas que se van a proyectar.
+ El coste es o(n), donde n es el nÃºmero de pelÃ­culas que se van a proyectar.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el código completo de tu solución aquí debajo
+ // Escribe el cÃ³digo completo de tu soluciÃ³n aquÃ­ debajo
  // ================================================================
  //@ <answer>
 
@@ -41,18 +41,18 @@ int resolver(vector<pair<int, int>> const& pelis, int N) {
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N;      // Número de películas que se van a proyectar.
+    int N;      // NÃºmero de pelÃ­culas que se van a proyectar.
 
     cin >> N;
     if (N == 0)
         return false;
 
-    vector<pair<int, int>> pelis(N);     // Vector de pares que contiene la hora de comienzo de la peli (en mins) y su duración (en mins).
+    vector<pair<int, int>> pelis(N);     // Vector de pares que contiene la hora de comienzo de la peli (en mins) y su duraciÃ³n (en mins).
     int h, min, duracion;   // Para leer la hora y el minuto de una peli y su duracion.
     char c;
     for (int i = 0; i < N; i++) {
         cin >> h >> c >> min >> duracion;
-        int mins = (h * 60) + min + duracion;   // Le sumamos la duración para saber a que hora acaba.
+        int mins = (h * 60) + min + duracion;   // Le sumamos la duraciÃ³n para saber a que hora acaba.
         pelis[i].first = mins;
         pelis[i].second = duracion;
     }
@@ -62,14 +62,14 @@ bool resuelveCaso() {
     // resolver el caso posiblemente llamando a otras funciones
     int sol = resolver(pelis, N);
 
-    // escribir la solución
+    // escribir la soluciÃ³n
     cout << sol << '\n';
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta línea ya no forma parte de la solución.
+//  Lo que se escriba dejado de esta lÃ­nea ya no forma parte de la soluciÃ³n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
