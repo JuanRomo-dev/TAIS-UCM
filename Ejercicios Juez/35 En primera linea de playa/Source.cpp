@@ -12,15 +12,15 @@ using namespace std;
 
 /*@ <answer>
 
- Escribe aquÌ un comentario general sobre la soluciÛn, explicando cÛmo
- se resuelve el problema y cu·l es el coste de la soluciÛn, en funciÛn
- del tamaÒo del problema.
+ Escribe aqu√≠ un comentario general sobre la soluci√≥n, explicando c√≥mo
+ se resuelve el problema y cu√°l es el coste de la soluci√≥n, en funci√≥n
+ del tama√±o del problema.
 
  @ </answer> */
 
 
  // ================================================================
- // Escribe el cÛdigo completo de tu soluciÛn aquÌ debajo
+ // Escribe el c√≥digo completo de tu soluci√≥n aqu√≠ debajo
  // ================================================================
  //@ <answer>
 
@@ -41,13 +41,13 @@ int resolver(vector<pair<int, int>> const& edificios, int N) {
 
 bool resuelveCaso() {
     // leer los datos de la entrada
-    int N;      // N˙mero de edificios.
+    int N;      // N√∫mero de edificios.
 
     cin >> N;
     if (N == 0)
         return false;
 
-    int w, e;       // Extremos m·s occidental y m·s oriental de un edificio.
+    int w, e;       // Extremos m√°s occidental y m√°s oriental de un edificio.
     vector<pair<int, int>> edificios(N);    // Vector para guardar los extremos de cada edificio.
     for (int i = 0; i < N; i++) {
         cin >> w >> e;
@@ -60,14 +60,14 @@ bool resuelveCaso() {
     // resolver el caso posiblemente llamando a otras funciones
     int sol = resolver(edificios, N);
 
-    // escribir la soluciÛn
+    // escribir la soluci√≥n
     cout << sol << '\n';
 
     return true;
 }
 
 //@ </answer>
-//  Lo que se escriba dejado de esta lÌnea ya no forma parte de la soluciÛn.
+//  Lo que se escriba dejado de esta l√≠nea ya no forma parte de la soluci√≥n.
 
 int main() {
     // ajustes para que cin extraiga directamente de un fichero
